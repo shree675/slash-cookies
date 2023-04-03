@@ -1,0 +1,10 @@
+.selected-element-slash-cookies {
+  background-color: aqua !important;
+}
+
+.overlay-element-slash-cookies {
+  position: absolute;
+  z-index: 999999;
+  background-color: rgb(116, 179, 158);
+  display: hidden;
+}
