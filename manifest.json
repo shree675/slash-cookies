@@ -1,11 +1,11 @@
 {
   "name": "slash-cookies",
   "description": "",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "manifest_version": 3,
   "icons": {
     "16": "./assets/icons/logo-16.png",
-    "32": "./assets/icons/logo-34.png",
+    "32": "./assets/icons/logo-32.png",
     "48": "./assets/icons/logo-48.png",
     "128": "./assets/icons/logo-128.png"
   },
@@ -22,7 +22,7 @@
     {
       "resources": [
         "./assets/icons/logo-16.png",
-        "./assets/icons/logo-34.png",
+        "./assets/icons/logo-32.png",
         "./assets/icons/logo-48.png",
         "./assets/icons/logo-128.png"
       ],
