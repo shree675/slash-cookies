@@ -31,7 +31,7 @@ const mouseEvents = (/** @type {number} */ type) => {
         bgColor: element.style.backgroundColor,
       });
       if (element === root) {
-        element.style.backgroundColor = "rgb(116, 179, 158, 0.8)";
+        element.style.backgroundColor = "rgba(116, 179, 158, 0.8)";
       } else {
         element.style.backgroundColor = "rgba(0, 0, 0, 0)";
       }

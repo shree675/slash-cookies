@@ -1,10 +1,66 @@
-.selected-element-slash-cookies {
-  background-color: aqua !important;
+body {
+  background-color: #323232;
 }
 
-.overlay-element-slash-cookies {
-  position: absolute;
-  z-index: 999999;
-  background-color: rgb(116, 179, 158);
-  display: hidden;
+#app {
+  width: 100px;
+  text-align: center;
+  padding: 0px;
+}
+
+button {
+  cursor: pointer;
+  margin: 3px;
+  text-decoration: none;
+  border: 1px solid black;
+  border-radius: 2px;
+  padding: 5px;
+  color: white;
+}
+
+#remove-element {
+  background-color: rgb(201, 74, 74);
+  width: 75px;
+}
+
+#remove-element:hover {
+  background-color: rgb(193, 27, 27);
+}
+
+#refine-element {
+  background-color: rgb(74, 91, 201);
+  width: 75px;
+}
+
+#refine-element:hover {
+  background-color: rgb(27, 49, 193);
+}
+
+.title {
+  color: wheat;
+  font-weight: bold;
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+
+.description {
+  text-align: left;
+}
+
+.info-section {
+  font-size: 12px;
+  color: #aaa;
+}
+
+.panel {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+#info {
+  color: #aaa;
+}
+
+#info:hover {
+  color: aliceblue;
 }

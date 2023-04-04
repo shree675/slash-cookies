@@ -5,17 +5,18 @@
     <link rel="icon" href="/icon/logo.ico" />
     <link rel="stylesheet" type="text/css" href="styles.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Chrome Extensioin + Vanilla + JS + Vite App - Popup</title>
+    <title>Slash Cookies</title>
   </head>
   <body>
     <div id="app">
-      <div id="debug-element"></div>
+      <!-- <div id="debug-element"></div> -->
+      <div class="title">Slash Cookies</div>
       <div class="panel">
-        <button id="remove-element">Remove Element</button>
+        <button id="remove-element"><img src="./assets/img/remove_icon.svg" height="45px" /></button>
+        <br />
+        <button id="refine-element"><img src="./assets/img/refine_icon.svg" height="20px" /></button>
       </div>
-      <div class="panel">
-        <button id="refine-element">Unblur Element</button>
-      </div>
+      <div class="info-section">&#9432; <a id="info" href="https://github.com/shree675/slash-cookies">Details</a></div>
     </div>
     <script type="module" src="./popup.js"></script>
   </body>
