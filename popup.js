@@ -1,8 +1,14 @@
 //@ts-check
 
 const mouseEvents = (/** @type {number} */ type) => {
+  let curEvent = null;
   let childElements = [];
   let childStyleAttributes = [];
+
+  const prevOnmouseover = window.onmouseover;
+  const prevOnmouseout = window.onmouseout;
+  const prevOnkeyup = window.onkeyup;
+  const prevOnclick = window.onclick;
 
   const terminate = (
     /** @type {string | any[]} */ childElements,
@@ -13,13 +19,30 @@ const mouseEvents = (/** @type {number} */ type) => {
     }
     childElements = [];
     childStyleAttributes = [];
-    window.onmouseover = null;
-    window.onmouseout = null;
-    window.onkeyup = null;
-    window.onclick = null;
+    window.onmouseover = prevOnmouseover;
+    window.onmouseout = prevOnmouseout;
+    window.onkeyup = prevOnkeyup;
+    window.onclick = prevOnclick;
+  };
+
+  const clickHandler = (event) => {
+    terminate(childElements, childStyleAttributes);
+    if (type === 0) {
+      event.target.style.display = "none";
+    } else {
+      event.target.style.filter = "none";
+      event.target.style.backgroundColor = "rgba(0, 0, 0, 0)";
+    }
+    return false;
+  };
+
+  window.onclick = (event) => {
+    clickHandler(event);
   };
 
   window.onmouseover = (event) => {
+    curEvent = event;
+
     const obtainAllChildren = (
       /** @type {{ style: { backgroundColor: string; }; children: any; }} */ element,
       /** @type {any[]} */ childElements,
@@ -48,28 +71,21 @@ const mouseEvents = (/** @type {number} */ type) => {
     );
   };
 
-  window.onmouseout = function () {
+  window.onmouseout = () => {
     for (var i = 0; i < childElements.length; i++) {
       childElements[i].style.backgroundColor = childStyleAttributes[i].bgColor;
     }
     childElements = [];
     childStyleAttributes = [];
+    curEvent = null;
   };
 
-  window.onclick = function (event) {
+  window.onkeyup = (event) => {
     terminate(childElements, childStyleAttributes);
-    if (type === 0) {
-      event.target.style.display = "none";
-    } else {
-      event.target.style.filter = "none";
-      event.target.style.backgroundColor = "rgba(0, 0, 0, 0)";
-    }
-    return false;
-  };
-
-  window.onkeyup = function (event) {
     if (event.key === "Escape") {
-      terminate(childElements, childStyleAttributes);
+      return false;
+    } else if (event.key === "Enter") {
+      clickHandler(curEvent);
       return false;
     }
   };
