@@ -15,6 +15,9 @@ A chrome extension to remove popups like cookies and other non-closable windows 
 
 Press <kbd>Esc</kbd> at any time to exit the process.
 
+> **Note**  
+> If clicking on the element does not work, press <kbd>Enter</kbd> to perform the action while hovering over the element.
+
 ## Demonstration
 
 <img src="https://user-images.githubusercontent.com/58718144/229707308-1b390ee2-b304-4a70-b162-adea7036087c.gif" height="440" />
