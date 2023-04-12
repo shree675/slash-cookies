@@ -142,6 +142,12 @@ const clearStorageURL = (tabUrl) => {
 
 document.addEventListener("DOMContentLoaded", async () => {
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+  // HTTPS only according to manifest file
+  const tabUrlMatches = tab.url?.match("https://[^/]*");
+  let tabUrl = null;
+  if (tabUrlMatches) {
+    tabUrl = tabUrlMatches[0];
+  }
 
   const save = document.getElementById("checkbox");
 
@@ -152,7 +158,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       //@ts-ignore
       function: mouseEvents,
       //@ts-ignore
-      args: [0, tab.url, save?.checked], // remove element
+      args: [0, tabUrl, save?.checked], // remove element
     });
   };
 
@@ -163,7 +169,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       //@ts-ignore
       function: mouseEvents,
       //@ts-ignore
-      args: [1, tab.url, save?.checked], // refine element
+      args: [1, tabUrl, save?.checked], // refine element
     });
   };
 
@@ -173,7 +179,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       target: { tabId: tab.id || 0 },
       //@ts-ignore
       function: clearStorageURL,
-      args: [tab.url], // refine element
+      args: [tabUrl], // refine element
     });
   };
 

@@ -1,7 +1,11 @@
 //@ts-check
 
 chrome.webNavigation.onCompleted.addListener(function (details) {
-  const tabUrl = details.url;
+  const tabUrlMatches = details.url.match("https://[^/]*");
+  let tabUrl = null;
+  if (tabUrlMatches) {
+    tabUrl = tabUrlMatches[0];
+  }
   const tabId = details.tabId;
 
   const filterElements = (
