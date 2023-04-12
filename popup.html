@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" href="/icon/logo.ico" />
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="styles.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Slash Cookies</title>
   </head>
@@ -11,12 +11,38 @@
     <div id="app">
       <!-- <div id="debug-element"></div> -->
       <div class="title">Slash Cookies</div>
-      <div class="panel">
-        <button id="remove-element"><img src="./assets/img/remove_icon.svg" height="45px" /></button>
-        <br />
-        <button id="refine-element"><img src="./assets/img/refine_icon.svg" height="20px" /></button>
+      <div class="outer">
+        <div class="panel">
+          <button id="remove-element">
+            <img src="./assets/img/remove_icon.svg" height="45px" />
+          </button>
+          <br />
+          <button id="refine-element">
+            <img src="./assets/img/refine_icon.svg" height="20px" />
+          </button>
+        </div>
+        <div class="panel">
+          <div style="height: 58px">
+            <div class="save-label">Save</div>
+            <label class="switch">
+              <input id="checkbox" type="checkbox" checked="true" />
+              <span class="slider round"></span>
+            </label>
+          </div>
+          <button id="clear-storage">
+            <img src="./assets/img/erase_icon.svg" height="18px" />
+          </button>
+        </div>
       </div>
-      <div class="info-section">&#9432; <a target="_blank" id="info" href="https://github.com/shree675/slash-cookies#slash-cookies">Details</a></div>
+      <div class="info-section">
+        &#9432;
+        <a
+          target="_blank"
+          id="info"
+          href="https://github.com/shree675/slash-cookies#slash-cookies"
+          >Details</a
+        >
+      </div>
     </div>
     <script type="module" src="./popup.js"></script>
   </body>

@@ -1,6 +1,10 @@
 //@ts-check
 
-const mouseEvents = (/** @type {number} */ type) => {
+const mouseEvents = (
+  /** @type {number} */ type,
+  /** @type {string | number} */ tabUrl,
+  /** @type {any} */ save
+) => {
   let curEvent = null;
   let childElements = [];
   let childStyleAttributes = [];
@@ -26,14 +30,46 @@ const mouseEvents = (/** @type {number} */ type) => {
   };
 
   const clickHandler = (event) => {
-    terminate(childElements, childStyleAttributes);
-    if (type === 0) {
-      event.target.style.display = "none";
-    } else {
-      event.target.style.filter = "none";
-      event.target.style.backgroundColor = "rgba(0, 0, 0, 0)";
-    }
-    return false;
+    let storage = null;
+    chrome.storage.local.get("mappings", ({ mappings }) => {
+      storage = mappings;
+      if (!storage) {
+        storage = {};
+      }
+      if (!storage[tabUrl]) {
+        storage[tabUrl] = {
+          remove: [],
+          refine: [],
+        };
+      }
+      terminate(childElements, childStyleAttributes);
+      if (type === 0) {
+        event.target.style.display = "none";
+        if (event.target.id && event.target.id !== "") {
+          storage[tabUrl].remove.push([event.target.id, null]);
+        } else if (event.target.className && event.target.className !== "") {
+          storage[tabUrl].remove.push([null, event.target.className]);
+        } else {
+          //@ts-ignore
+          document.getElementById("app").style.backgroundColor = "red";
+        }
+      } else {
+        event.target.style.filter = "none";
+        event.target.style.backgroundColor = "rgba(0, 0, 0, 0)";
+        if (event.target.id && event.target.id !== "") {
+          storage[tabUrl].refine.push([event.target.id, null]);
+        } else if (event.target.className && event.target.className !== "") {
+          storage[tabUrl].refine.push([null, event.target.className]);
+        } else {
+          //@ts-ignore
+          document.getElementById("app").style.backgroundColor = "red";
+        }
+      }
+      if (save) {
+        chrome.storage.local.set({ mappings: storage });
+      }
+      return false;
+    });
   };
 
   window.onclick = (event) => {
@@ -91,8 +127,23 @@ const mouseEvents = (/** @type {number} */ type) => {
   };
 };
 
+const clearStorageURL = (tabUrl) => {
+  chrome.storage.local.get("mappings", ({ mappings }) => {
+    if (tabUrl && mappings[tabUrl]) {
+      mappings[tabUrl] = {
+        remove: [],
+        refine: [],
+      };
+      chrome.storage.local.set({ mappings: mappings });
+      window.location.reload();
+    }
+  });
+};
+
 document.addEventListener("DOMContentLoaded", async () => {
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+
+  const save = document.getElementById("checkbox");
 
   const removeElement = () => {
     window.close();
@@ -100,7 +151,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       target: { tabId: tab.id || 0 },
       //@ts-ignore
       function: mouseEvents,
-      args: [0], // remove element
+      //@ts-ignore
+      args: [0, tab.url, save?.checked], // remove element
     });
   };
 
@@ -110,7 +162,18 @@ document.addEventListener("DOMContentLoaded", async () => {
       target: { tabId: tab.id || 0 },
       //@ts-ignore
       function: mouseEvents,
-      args: [1], // refine element
+      //@ts-ignore
+      args: [1, tab.url, save?.checked], // refine element
+    });
+  };
+
+  const clearStorage = () => {
+    window.close();
+    chrome.scripting.executeScript({
+      target: { tabId: tab.id || 0 },
+      //@ts-ignore
+      function: clearStorageURL,
+      args: [tab.url], // refine element
     });
   };
 
@@ -120,4 +183,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   document
     .getElementById("refine-element")
     ?.addEventListener("click", refineElement);
+  document
+    .getElementById("clear-storage")
+    ?.addEventListener("click", clearStorage);
 });

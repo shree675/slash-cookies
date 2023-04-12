@@ -9,11 +9,12 @@
     "48": "./assets/icons/logo-48.png",
     "128": "./assets/icons/logo-128.png"
   },
-  "permissions": ["tabs", "activeTab", "scripting"],
+  "permissions": ["tabs", "activeTab", "scripting", "storage", "webNavigation"],
   "action": {
     "default_popup": "./popup.html",
     "default_icon": "./assets/icons/logo-48.png"
   },
+  "host_permissions": ["https://*/*"],
   "background": {
     "service_worker": "./background.js",
     "type": "module"
