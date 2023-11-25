@@ -21,7 +21,7 @@ Optional:
 
 Press <kbd>Esc</kbd> at any time to exit the process.
 
-> **Note**  
+> [!IMPORTANT]
 > If clicking on the element does not work, press <kbd>Enter</kbd> to perform the action while hovering over the element.
 
 ## Demonstration
