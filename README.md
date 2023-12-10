@@ -16,13 +16,15 @@ The extension will remember the elements marked as removed or refined. Hence, ma
 4. Click on the selected popup or window to remove or refine it.
 
 Optional:
-* Toggle *Save* to not save the current selection.
-* Click on the erasor icon to clear the stored windows to be removed/refined for the current web domain.
+* Uncheck *Save* to not save the current selection.
+* Click on the erasor icon to clear the rules for the current web domain (URL).
 
 Press <kbd>Esc</kbd> at any time to exit the process.
 
 > [!IMPORTANT]
 > If clicking on the element does not work, press <kbd>Enter</kbd> to perform the action while hovering over the element.
+
+The extension also displays a notification popup briefly to inform the user that certain HTML elements were hidden/modified as per the defined rules for a given web page.
 
 ## Demonstration
 
@@ -30,4 +32,4 @@ Press <kbd>Esc</kbd> at any time to exit the process.
 
 ## Version
 
-0.1.1
+0.1.5
