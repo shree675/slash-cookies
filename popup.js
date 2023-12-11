@@ -130,10 +130,19 @@ const mouseEvents = (
 const clearStorageURL = (tabUrl) => {
   chrome.storage.local.get("mappings", ({ mappings }) => {
     if (tabUrl && mappings[tabUrl]) {
-      mappings[tabUrl] = {
-        remove: [],
-        refine: [],
-      };
+      delete mappings[tabUrl];
+      chrome.storage.local.set({ mappings: mappings });
+      window.location.reload();
+    }
+  });
+};
+
+const clearAllStorageURL = () => {
+  chrome.storage.local.get("mappings", ({ mappings }) => {
+    if (mappings) {
+      Object.keys(mappings).forEach((tabUrl) => {
+        delete mappings[tabUrl];
+      });
       chrome.storage.local.set({ mappings: mappings });
       window.location.reload();
     }
@@ -149,6 +158,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     tabUrl = tabUrlMatches[0];
   }
 
+  const confirmDialog = document.getElementById("dialog");
   const save = document.getElementById("checkbox");
 
   const removeElement = () => {
@@ -183,6 +193,25 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   };
 
+  const clearAllStorage = () => {
+    window.close();
+    chrome.scripting.executeScript({
+      target: { tabId: tab.id || 0 },
+      //@ts-ignore
+      function: clearAllStorageURL,
+    });
+  };
+
+  const openPopUp = () => {
+    //@ts-ignore
+    confirmDialog.style.display = "flex";
+  }
+
+  const closePopUp = () => {
+    //@ts-ignore
+    confirmDialog.style.display = "none";
+  }
+
   document
     .getElementById("remove-element")
     ?.addEventListener("click", removeElement);
@@ -192,4 +221,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   document
     .getElementById("clear-storage")
     ?.addEventListener("click", clearStorage);
+    document
+      .getElementById("button-yes")
+      ?.addEventListener("click", clearAllStorage);
+  document
+    .getElementById("clear-all")
+    ?.addEventListener("click", openPopUp);
+  document
+    .getElementById("button-no")
+    ?.addEventListener("click", closePopUp);
 });
