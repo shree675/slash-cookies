@@ -140,10 +140,7 @@ const clearStorageURL = (tabUrl) => {
 const clearAllStorageURL = () => {
   chrome.storage.local.get("mappings", ({ mappings }) => {
     if (mappings) {
-      Object.keys(mappings).forEach((tabUrl) => {
-        delete mappings[tabUrl];
-      });
-      chrome.storage.local.set({ mappings: mappings });
+      chrome.storage.local.set({ mappings: {} });
       window.location.reload();
     }
   });
