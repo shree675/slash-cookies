@@ -17,7 +17,7 @@ The extension will remember the elements marked as removed or refined. Hence, ma
 
 Optional:
 * Uncheck *Save* to not save the current selection.
-* Click on the erasor icon to clear the rules for the current web domain (URL).
+* Click on the eraser icon to clear the rules for the current web domain (URL).
 
 Press <kbd>Esc</kbd> at any time to exit the process.
 
