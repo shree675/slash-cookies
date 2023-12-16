@@ -202,12 +202,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   const openPopUp = () => {
     //@ts-ignore
     confirmDialog.style.display = "flex";
-  }
+  };
 
   const closePopUp = () => {
     //@ts-ignore
     confirmDialog.style.display = "none";
-  }
+  };
 
   document
     .getElementById("remove-element")
@@ -218,13 +218,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   document
     .getElementById("clear-storage")
     ?.addEventListener("click", clearStorage);
-    document
-      .getElementById("button-yes")
-      ?.addEventListener("click", clearAllStorage);
   document
-    .getElementById("clear-all")
-    ?.addEventListener("click", openPopUp);
-  document
-    .getElementById("button-no")
-    ?.addEventListener("click", closePopUp);
+    .getElementById("button-yes")
+    ?.addEventListener("click", clearAllStorage);
+  document.getElementById("clear-all")?.addEventListener("click", openPopUp);
+  document.getElementById("button-no")?.addEventListener("click", closePopUp);
 });

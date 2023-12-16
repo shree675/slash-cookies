@@ -16,8 +16,9 @@ The extension will remember the elements marked as removed or refined. Hence, ma
 4. Click on the selected popup or window to remove or refine it.
 
 Optional:
-* Uncheck *Save* to not save the current selection.
-* Click on the eraser icon to clear the rules for the current web domain (URL).
+
+- Uncheck _Save_ to not save the current selection.
+- Click on the eraser icon to clear the rules for the current web domain (URL).
 
 Press <kbd>Esc</kbd> at any time to exit the process.
 
