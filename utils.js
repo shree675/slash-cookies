@@ -1,13 +1,13 @@
 getNotificationHtml = (document) => {
   const notificationElement = document.createElement("div");
-  notificationElement.style.position = "absolute";
+  notificationElement.style.position = "fixed";
   notificationElement.style.right = "10px";
   notificationElement.style.top = "10px";
   notificationElement.style.color = "white";
   notificationElement.style.backgroundColor = "#323232";
   notificationElement.style.padding = "10px";
   notificationElement.style.borderRadius = "5px";
-  notificationElement.style.zIndex = "999999";
+  notificationElement.style.zIndex = "999999999";
   notificationElement.style.fontFamily = "Verdana";
 
   const firstChildElement = document.createElement("div");
